@@ -1,5 +1,6 @@
 #include <iostream>
-
+#include <vector>
+#include <fstream>
 using namespace std;
 
 
@@ -16,7 +17,7 @@ bool inDic(char atual) {
     return false;
 }
 
-void readAlphabet(){
+void readAlphabet(string bookPath){
     ifstream myfile;
     char atual;
     myfile.open (bookPath);
@@ -34,7 +35,8 @@ void readAlphabet(){
 
 int main() {
     
-    
+    readAlphabet("annakarenina-portugues.txt");
+    cout << dic.size() << endl;
     
     
 }
