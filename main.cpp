@@ -52,15 +52,10 @@ string inBin(string Sc, vector<string> dictionary){
     int pos;
     int exponent = 0;
     int noOfBits = 1;
-    for (pos = 0; dictionary[pos] != Sc ; pos++){
-        if (pos > noOfBits){
-            noOfBits *= 2;
-            exponent++;
-        }
-    }
-    if (pos > noOfBits){
-            noOfBits *= 2;
-            exponent++;
+    for (pos = 0; dictionary[pos] != Sc ; pos++)
+    while(noOfBits < dictionary.size()){
+        noOfBits *= 2;
+        exponent++;
     }
     vector<int> ret;
     while(pos) {
@@ -129,6 +124,7 @@ int main() {
     readAlphabet("annakarenina-english.txt");
     
     vector<string> dic;
+    dic.push_back("");
     dic.push_back("a");
     dic.push_back("ab");
     dic.push_back("abc");
