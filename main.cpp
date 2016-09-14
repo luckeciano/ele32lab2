@@ -61,10 +61,13 @@ void lempelZiv(string bookPath) {
             Sc = S + atual;
             if (!inDic(Sc, dictionary)) {
                 dictionary.push_back(Sc);
-                compacOutput << inBin(S);
-            }
+                //compacOutput << inBin(S, dictionary);
+                compacOutput << S;
+                Sc = "";
+                S = atual;
+            } else  S += atual;
             
-            S += atual;
+           
         }
         myfile.close();
         compacOutput.close();
@@ -76,9 +79,6 @@ void lempelZiv(string bookPath) {
 int main() {
     
     readAlphabet("annakarenina-english.txt");
-    for (int i = 0; i < alphabet.size(); i++) {
-        cout << alphabet[i] << endl;
-    }
-    
+    lempelZiv("annakarenina-english.txt");
     
 }
