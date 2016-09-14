@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include <bitset>
+#include <algorithm>
+#include <iterator>
+#include <sstream>
 using namespace std;
 
 
@@ -59,9 +61,22 @@ string inBin(string Sc, vector<string> dictionary){
             noOfBits *= 2;
             exponent++;
     }
-    const unsigned int ssize = exponent;
-    return bitset<ssize>(pos).to_string();
-    
+    vector<int> ret;
+    while(pos) {
+        if (pos&1)
+            ret.push_back(1);
+        else
+            ret.push_back(0);
+        pos>>=1;  
+    }
+    reverse(ret.begin(),ret.end());
+    stringstream result;
+    copy(ret.begin(), ret.end(), ostream_iterator<int>(result, ""));
+    string binary = result.str().c_str();
+    while (binary.size() < exponent){
+        binary = "0"+binary;
+    }
+    return binary;
 }
 
 void lempelZiv(string bookPath) {
@@ -102,10 +117,6 @@ void lempelZiv(string bookPath) {
 int main() {
     
     readAlphabet("annakarenina-english.txt");
-
-    for (int i = 0; i < alphabet.size(); i++) {
-        cout << alphabet[i] << endl;
-    }
     
     vector<string> dic;
     dic.push_back("a");
@@ -115,7 +126,7 @@ int main() {
     dic.push_back("abcde");
     cout<<inBin("abc",dic);
 
-    lempelZiv("annakarenina-english.txt");
+    //lempelZiv("annakarenina-english.txt");
 
     
 }
