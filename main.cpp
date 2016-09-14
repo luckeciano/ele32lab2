@@ -74,7 +74,9 @@ string inBin(string Sc, vector<string> dictionary){
     }
     return binary;
 }
-void init(vector<string> dictionary) {
+
+
+void init(vector<string> &dictionary) {
     dictionary.push_back("");
     for (int i = 0; i < alphabet.size(); i++) {
         dictionary.push_back(string(1, alphabet[i]));
@@ -88,7 +90,9 @@ void lempelZiv(string bookPath) {
     ofstream compacOutput;
     compacOutput.open ("output.txt");
     vector<string> dictionary;
+    cout << dictionary.size() << endl;
     init(dictionary);
+    cout << dictionary.size();
     vector<char> Sc;
     
     char atual;
@@ -105,7 +109,7 @@ void lempelZiv(string bookPath) {
             if (!inDic(Sc, dictionary)) {
                 dictionary.push_back(Sc);
                 compacOutput << inBin(S, dictionary);
-                //compacOutput << S;
+                //compacOutput << S << endl;
                 Sc = "";
                 S = atual;
             } else  S += atual;
@@ -121,17 +125,8 @@ void lempelZiv(string bookPath) {
 
 int main() {
     
-    readAlphabet("annakarenina-english.txt");
-    
-    vector<string> dic;
-    dic.push_back("");
-    dic.push_back("a");
-    dic.push_back("ab");
-    dic.push_back("abc");
-    dic.push_back("abcd");
-    dic.push_back("abcde");
-    cout<<inBin("abc",dic);
+    readAlphabet("test.txt");
 
-    lempelZiv("annakarenina-english.txt");
+    lempelZiv("test.txt");
     
 }
