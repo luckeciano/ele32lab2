@@ -7,6 +7,7 @@ using namespace std;
 
 
 vector<char> alphabet;
+int L = 1000000000;
 
 bool inAlphabet(char atual) {
     for (int i = 0; i < alphabet.size(); i++) {
@@ -63,6 +64,13 @@ string inBin(string Sc, vector<string> dictionary){
     return bitset<ssize>(pos).to_string();
     
 }
+void init(vector<string> dictionary) {
+    dictionary.push_back("");
+    for (int i = 0; i < alphabet.size(); i++) {
+        dictionary.push_back(string(1, alphabet[i]));
+    }
+    
+}
 
 void lempelZiv(string bookPath) {
     
@@ -70,9 +78,7 @@ void lempelZiv(string bookPath) {
     ofstream compacOutput;
     compacOutput.open ("output.txt");
     vector<string> dictionary;
-    for (int i = 0; i < alphabet.size(); i++) {
-        dictionary.push_back(string(1, alphabet[i]));
-    }
+    init(dictionary);
     vector<char> Sc;
     
     char atual;
@@ -81,6 +87,10 @@ void lempelZiv(string bookPath) {
         string Sc = "";
         string S = "";
         while (myfile.get(atual)){
+            if (dictionary.size() == L) {
+                dictionary.clear();
+                init(dictionary);
+            }
             Sc = S + atual;
             if (!inDic(Sc, dictionary)) {
                 dictionary.push_back(Sc);
