@@ -5,12 +5,12 @@ using namespace std;
 
 
 
-vector<char> dic;
+vector<char> alphabet;
 
-bool inDic(char atual) {
+bool inAlphabet(char atual) {
     bool inDict = false;
-    for (int i = 0; i < dic.size(); i++) {
-        if (dic[i] == atual) {
+    for (int i = 0; i < alphabet.size(); i++) {
+        if (alphabet[i] == atual) {
             return true;
         }
     }
@@ -23,8 +23,8 @@ void readAlphabet(string bookPath){
     myfile.open (bookPath);
     if (myfile.is_open()){
         while (myfile.get(atual)){
-            if (!inDic(atual)) {
-                dic.push_back(atual);
+            if (!inAlphabet(atual)) {
+                alphabet.push_back(atual);
             }
             
         }
@@ -33,10 +33,33 @@ void readAlphabet(string bookPath){
  
 }
 
+void lempelZiv(string bookPath) {
+    
+    ifstream myfile;
+    vector<string> dictionary;
+    for (int i = 0; i < alphabet.size(); i++) {
+        dictionary.push_back(string(1, alphabet[i]));
+    }
+    vector<char> Sc;
+    
+    char atual;
+    myfile.open (bookPath);
+    if (myfile.is_open()){
+        while (myfile.get(atual)){
+            
+        }
+        myfile.close();
+    }
+    
+    
+}
+
 int main() {
     
-    readAlphabet("annakarenina-portugues.txt");
-    cout << dic.size() << endl;
+    readAlphabet("annakarenina-english.txt");
+    for (int i = 0; i < alphabet.size(); i++) {
+        cout << alphabet[i] << endl;
+    }
     
     
 }
