@@ -9,7 +9,6 @@ using namespace std;
 vector<char> alphabet;
 
 bool inAlphabet(char atual) {
-    bool inDict = false;
     for (int i = 0; i < alphabet.size(); i++) {
         if (alphabet[i] == atual) {
             return true;
@@ -68,6 +67,8 @@ string inBin(string Sc, vector<string> dictionary){
 void lempelZiv(string bookPath) {
     
     ifstream myfile;
+    ofstream compacOutput;
+    compacOutput.open ("output.txt");
     vector<string> dictionary;
     for (int i = 0; i < alphabet.size(); i++) {
         dictionary.push_back(string(1, alphabet[i]));
@@ -77,10 +78,22 @@ void lempelZiv(string bookPath) {
     char atual;
     myfile.open (bookPath);
     if (myfile.is_open()){
+        string Sc = "";
+        string S = "";
         while (myfile.get(atual)){
+            Sc = S + atual;
+            if (!inDic(Sc, dictionary)) {
+                dictionary.push_back(Sc);
+                //compacOutput << inBin(S, dictionary);
+                compacOutput << S;
+                Sc = "";
+                S = atual;
+            } else  S += atual;
             
+           
         }
         myfile.close();
+        compacOutput.close();
     }
     
     
@@ -89,6 +102,7 @@ void lempelZiv(string bookPath) {
 int main() {
     
     readAlphabet("annakarenina-english.txt");
+
     for (int i = 0; i < alphabet.size(); i++) {
         cout << alphabet[i] << endl;
     }
@@ -100,5 +114,8 @@ int main() {
     dic.push_back("abcd");
     dic.push_back("abcde");
     cout<<inBin("abc",dic);
+
+    lempelZiv("annakarenina-english.txt");
+
     
 }
