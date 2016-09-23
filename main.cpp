@@ -103,11 +103,6 @@ void lempelZiv(string bookPath) {
         string Sc = "";
         string S = "";
         while (myfile.get(atual)){
-            /*cout << endl;
-            for (int i = 0; i < dictionary.size(); i++) {
-                cout << dictionary[i] << " ";
-            }
-            cout << endl;*/
             if (dictionary.size() == L) {
                 dictionary.clear();
                 init(dictionary);
@@ -118,9 +113,6 @@ void lempelZiv(string bookPath) {
             if (!inDic(Sc, dictionary)) {
                 dictionary.push_back(Sc);
                 compacOutput << inBin(S, dictionary);
-                //compacOutput << "(" << inBin(S,dictionary) << ")";
-                //compacOutput << S;
-                //cout << dictionary.size() << ":" <<inBin(S, dictionary) << " " << S <<endl;
                 Sc = "";
                 S = atual;
             } else  S += atual;
@@ -169,17 +161,10 @@ void uncompress(string compactedPath) {
         int i = dictionary.size() + 1;
         string S = "";
         while(!myfile.eof()) {
-            //uncompressedOutput << endl;
-           /* for (int i = 0; i < dictionary.size(); i++) {
-                
-                uncompressedOutput << dictionary[i] << " ";
-            }
-            uncompressedOutput << endl;*/
              if (i == L + 1) {
                 dictionary.clear();
                 dictionary = initialDic;
                 i = dictionary.size() + 1;
-               // uncompressedOutput << endl;
                 S = "";
             }
             if (myfile.peek() == '\\')
@@ -196,12 +181,6 @@ void uncompress(string compactedPath) {
                     eBin.push_back(auxInt);
                 }
             }
-           /* uncompressedOutput << i << ":";
-            uncompressedOutput << "(";
-            for (int i = 0; i < eBin.size(); i++) {
-                uncompressedOutput << eBin[i];
-            }
-            uncompressedOutput << ")";*/
             int e = binToDec(eBin);
             if (e >= dictionary.size()) {
                 S += S[0];
