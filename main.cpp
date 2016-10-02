@@ -4,7 +4,9 @@
 #include <algorithm>
 #include <iterator>
 #include <sstream>
+#include <chrono>
 using namespace std;
+using namespace std::chrono;
 
 
 
@@ -84,11 +86,11 @@ void init(vector<string> &dictionary) {
 
 }
 
-void lempelZiv(string bookPath) {
+void lempelZiv(string bookPath, string compactPath) {
 
     ifstream myfile;
     ofstream compacOutput;
-    compacOutput.open ("compressed_data.txt");
+    compacOutput.open (compactPath);
     vector<string> dictionary;
     init(dictionary);
     vector<char> Sc;
@@ -216,8 +218,175 @@ void uncompress(string compactedPath) {
 }
 
 int main() {
-    readAlphabet("test.txt");
-    lempelZiv("test.txt");
-    uncompress("compressed_data.txt");
+    high_resolution_clock::time_point t1, t2;
+    
+    L = 100;
+    cout << "L = " << L << endl;
+    t1 = high_resolution_clock::now();
+    readAlphabet("la-carita-del-prossimo.txt");
+    lempelZiv("la-carita-del-prossimo.txt", "la-carita-del-prossimo-comp-100.txt");
+    t2 = high_resolution_clock::now();
+    auto duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "La Carita del Prossimo: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("der-dunkelgraf.txt");
+    lempelZiv("der-dunkelgraf.txt", "der-dunkelgraf-comp-100.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Der Dunkelgraf: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("los-argonautas.txt");
+    lempelZiv("los-argonautas.txt", "los-argonautas-comp-100.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Los Argonautas: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("annakarenina-english.txt");
+    lempelZiv("annakarenina-english.txt", "annakarenina-english-comp-100.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Anna Karenina (English): " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("notre-dame-de-paris.txt");
+    lempelZiv("notre-dame-de-paris.txt", "notre-dame-de-paris-comp-100.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Notredame de Paris: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("annakarenina-portugues.txt");
+    lempelZiv("annakarenina-portugues.txt", "annakarenina-portugues-comp-100.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Anna Karenina (Portugues): " << duracao << endl;
+    
+    alphabet.clear();
+    
+    L = 10000;
+    cout << endl << "L = " << L << endl;
+    t1 = high_resolution_clock::now();
+    readAlphabet("la-carita-del-prossimo.txt");
+    lempelZiv("la-carita-del-prossimo.txt", "la-carita-del-prossimo-comp-10000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "La Carita del Prossimo: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("der-dunkelgraf.txt");
+    lempelZiv("der-dunkelgraf.txt", "der-dunkelgraf-comp-10000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Der Dunkelgraf: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("los-argonautas.txt");
+    lempelZiv("los-argonautas.txt", "los-argonautas-comp-10000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Los Argonautas: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("annakarenina-english.txt");
+    lempelZiv("annakarenina-english.txt", "annakarenina-english-comp-10000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Anna Karenina (English): " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("notre-dame-de-paris.txt");
+    lempelZiv("notre-dame-de-paris.txt", "notre-dame-de-paris-comp-10000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Notredame de Paris: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("annakarenina-portugues.txt");
+    lempelZiv("annakarenina-portugues.txt", "annakarenina-portugues-comp-10000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Anna Karenina (Portugues): " << duracao << endl;
+    
+    alphabet.clear();
+    
+    L = 1000000;
+    cout << endl << "L = " << L << endl;
+    t1 = high_resolution_clock::now();
+    readAlphabet("la-carita-del-prossimo.txt");
+    lempelZiv("la-carita-del-prossimo.txt", "la-carita-del-prossimo-comp-1000000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "La Carita del Prossimo: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("der-dunkelgraf.txt");
+    lempelZiv("der-dunkelgraf.txt", "der-dunkelgraf-comp-1000000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Der Dunkelgraf: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("los-argonautas.txt");
+    lempelZiv("los-argonautas.txt", "los-argonautas-comp-1000000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Los Argonautas: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("annakarenina-english.txt");
+    lempelZiv("annakarenina-english.txt", "annakarenina-english-comp-1000000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Anna Karenina (English): " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("notre-dame-de-paris.txt");
+    lempelZiv("notre-dame-de-paris.txt", "notre-dame-de-paris-comp-1000000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Notredame de Paris: " << duracao << endl;
+    
+    alphabet.clear();
+    
+    t1 = high_resolution_clock::now();
+    readAlphabet("annakarenina-portugues.txt");
+    lempelZiv("annakarenina-portugues.txt", "annakarenina-portugues-comp-1000000.txt");
+    t2 = high_resolution_clock::now();
+    duracao = duration_cast<microseconds>( t2 - t1 ).count();
+    cout << "Anna Karenina (Portugues): " << duracao << endl;
+    
+    alphabet.clear();
+    //uncompress("compressed_data.txt");
 
 }
